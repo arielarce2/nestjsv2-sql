@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+
+  phpmyadmin:
+      image: phpmyadmin
+      ports:
+          - 8081:80
+      environment:
+          MYSQL_ROOT_PASSWORD: root
+          PMA_HOST: mysql
+          PMA_USER: user_crud
+          PMA_PASSWORD: root
+      depends_on:
+          - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_crud
+      MYSQL_USER: user_crud
+      MYSQL_PASSWORD: root
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - "3307:3306"
